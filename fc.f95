@@ -24,24 +24,28 @@
 ! -h : Will show help text and exit program.
 
 program fc
+    implicit none
+
     integer :: cmd_cnt
     character(100) :: arg1, arg2, arg3
 
     cmd_cnt = command_argument_count()
 
-    if cmd_cnt == 3 then
+    if (cmd_cnt == 3) then
         !get args and call function for compare
-    else if cmd_cnt == 2 then
+    else if (cmd_cnt == 2) then
         !get args and call function to get last arg.
-    else if cmd_cnt == 1 then
-        arg1 = call get_command_argument(1)
-        if trim(arg1) == "-l" then
+    else if (cmd_cnt == 1) then
+        call get_command_argument(1, arg1)
+        if (trim(arg1) == "-l") then
             !call function to write out licence info
-        else if trim(arg1) == "-h" then
+        else if (trim(arg1) == "-h") then
             !call function that writes help text
         end if 
     else
-        write(*,*) "Error! Wrong type or number of arguments."
+        write(*,'(/a/a/a/)') "Fortran compare", &
+                             "***************", &
+                             "Error! Wrong type or number of arguments."
     end if
 
 
